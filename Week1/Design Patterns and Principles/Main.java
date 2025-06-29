@@ -1,18 +1,45 @@
-package Singleton;
+package Factory;
+
+
+interface Shape {
+    void draw();
+}
+
+
+class Circle implements Shape {
+    public void draw() {
+        System.out.println("Drawing a Circle.");
+    }
+}
+
+class Rectangle implements Shape {
+    public void draw() {
+        System.out.println("Drawing a Rectangle.");
+    }
+}
+
+
+class ShapeFactory {
+    public Shape getShape(String shapeType) {
+        if (shapeType == null) return null;
+        if (shapeType.equalsIgnoreCase("CIRCLE")) {
+            return new Circle();
+        } else if (shapeType.equalsIgnoreCase("RECTANGLE")) {
+            return new Rectangle();
+        }
+        return null;
+    }
+}
+
 
 public class Main {
     public static void main(String[] args) {
+        ShapeFactory shapeFactory = new ShapeFactory();
 
-        Singleton s1 = Singleton.getInstance();
-        s1.showMessage();
+        Shape shape1 = shapeFactory.getShape("CIRCLE");
+        shape1.draw();
 
-        Singleton s2 = Singleton.getInstance();
-
-
-        if (s1 == s2) {
-            System.out.println("Both instances are the same (week1.Singleton works).");
-        } else {
-            System.out.println("Different instances (week1.Singleton failed).");
-        }
+        Shape shape2 = shapeFactory.getShape("RECTANGLE");
+        shape2.draw();
     }
 }
