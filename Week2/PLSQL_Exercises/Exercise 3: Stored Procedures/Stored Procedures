@@ -1,0 +1,32 @@
+SET SERVEROUTPUT ON;
+
+CREATE OR REPLACE PROCEDURE analyze_number(n IN NUMBER) AS
+    sum_result NUMBER := 0;
+BEGIN
+    IF MOD(n, 2) = 0 THEN
+        DBMS_OUTPUT.PUT_LINE('The number ' || n || ' is Even.');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('The number ' || n || ' is Odd.');
+    END IF;
+
+    FOR i IN 1..n LOOP
+        sum_result := sum_result + i;
+    END LOOP;
+    DBMS_OUTPUT.PUT_LINE('Sum from 1 to ' || n || ' is: ' || sum_result);
+
+    DBMS_OUTPUT.PUT_LINE('Even numbers between 1 and ' || n || ':');
+    FOR j IN 1..n LOOP
+        IF MOD(j, 2) = 0 THEN
+            DBMS_OUTPUT.PUT_LINE(j);
+        END IF;
+    END LOOP;
+END;
+/
+
+
+To call this procedure we use:
+--BEGIN
+--    analyze_number(10);  -- Replace 10 with any number you like
+--END;
+--/
+
