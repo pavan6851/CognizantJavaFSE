@@ -1,0 +1,27 @@
+SET SERVEROUTPUT ON;
+
+DECLARE
+    num NUMBER := 10; -- You can change this to any number
+    i   NUMBER := 1;
+    sum NUMBER := 0;
+BEGIN
+    IF MOD(num, 2) = 0 THEN
+        DBMS_OUTPUT.PUT_LINE('The number ' || num || ' is Even.');
+    ELSE
+        DBMS_OUTPUT.PUT_LINE('The number ' || num || ' is Odd.');
+    END IF;
+
+    WHILE i <= num LOOP
+        sum := sum + i;
+        i := i + 1;
+    END LOOP;
+    DBMS_OUTPUT.PUT_LINE('Sum from 1 to ' || num || ' is: ' || sum);
+
+    DBMS_OUTPUT.PUT_LINE('Even numbers between 1 and ' || num || ':');
+    FOR j IN 1..num LOOP
+        IF MOD(j, 2) = 0 THEN
+            DBMS_OUTPUT.PUT_LINE(j);
+        END IF;
+    END LOOP;
+END;
+/
